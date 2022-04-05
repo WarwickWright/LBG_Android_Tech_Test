@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UI.MainFragment">
+
+    <TextView
+        android:id="@+id/lblTime"
+        android:gravity="top|center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time Will Show Here" />
+
+    <TextView
+        android:id="@+id/lblTarget"
+        android:gravity="top|center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Target Currency" />
+
+    <LinearLayout
+        android:id="@+id/lytListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
+
+</LinearLayout>
