@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference
 import java.net.HttpURLConnection
 import java.net.URL
 
-class OnlineData(var callingActivity: AppCompatActivity): Runnable {
+class OnlineData(private var callingActivity: AppCompatActivity): Runnable {
 
     interface IOnlineData { fun iOnlineData(data: String?) }
 
@@ -42,24 +42,23 @@ class OnlineData(var callingActivity: AppCompatActivity): Runnable {
         val sb: StringBuilder
 
         try {
-            httpURLConnection = url?.openConnection() as HttpURLConnection
-            httpURLConnection?.doInput = true
-            httpURLConnection?.doOutput = false
-            httpURLConnection?.useCaches = true
-            httpURLConnection?.requestMethod = "GET"
-            httpURLConnection?.readTimeout = 15 * 1000
-            httpURLConnection?.setRequestProperty("Accept-Encoding", "x-www-form-urlencoded")
-            httpURLConnection?.connect()
-            bufferedReader = BufferedReader(InputStreamReader(httpURLConnection?.inputStream))
+            httpURLConnection = url.openConnection() as HttpURLConnection
+            httpURLConnection.doInput = true
+            httpURLConnection.doOutput = false
+            httpURLConnection.useCaches = true
+            httpURLConnection.requestMethod = "GET"
+            httpURLConnection.readTimeout = 15 * 1000
+            httpURLConnection.setRequestProperty("Accept-Encoding", "x-www-form-urlencoded")
+            httpURLConnection.connect()
+            bufferedReader = BufferedReader(InputStreamReader(httpURLConnection.inputStream))
             sb = StringBuilder()
-            var line: String?
             bufferedReader.useLines { lines ->
                 lines.forEach { line ->
                     sb.append(line)
                 }
             }
             bufferedReader.close()
-            httpURLConnection?.inputStream?.close()
+            httpURLConnection.inputStream?.close()
             msg.obj = sb.toString()
             onlineDataHandler?.handleMessage(msg)
         } catch (e: IOException) {
@@ -71,7 +70,7 @@ class OnlineData(var callingActivity: AppCompatActivity): Runnable {
 
     companion object {
 
-        class OnlineDataHandler(private var onlineDataRef: WeakReference<OnlineData>, var callingActivity: AppCompatActivity) : Handler(callingActivity.mainLooper) {
+        class OnlineDataHandler(private var onlineDataRef: WeakReference<OnlineData>, callingActivity: AppCompatActivity) : Handler(callingActivity.mainLooper) {
             override fun handleMessage(msg: Message) {
                 val oldRef: OnlineData? = onlineDataRef.get()
                 if(oldRef != null) {

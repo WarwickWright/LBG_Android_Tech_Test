@@ -36,10 +36,10 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         rootView = inflater.inflate(R.layout.main_fragment, container, false)
 
-        lblTime = rootView.findViewById<TextView>(R.id.lblTime)
+        lblTime = rootView.findViewById(R.id.lblTime)
         lblTarget = rootView.findViewById(R.id.lblTarget)
 
         if(target != "") {
@@ -49,17 +49,19 @@ class MainFragment : Fragment() {
             lblTarget.text = DEFAULT_TARGET
         }
 
-        dateViewModel.selected.observe(viewLifecycleOwner, Observer<Date> { date: Date? ->
+        dateViewModel.selected.observe(viewLifecycleOwner) { date: Date? ->
             lblTime.text = timeUtils.getFriendlyDate(date!!)
-        })
+        }
 
-        ratesViewModel.selected.observe(viewLifecycleOwner, Observer<MutableList<RatesObj>> { ratesObjs: MutableList<RatesObj> ->
+        ratesViewModel.selected.observe(viewLifecycleOwner) { ratesObjs: MutableList<RatesObj> ->
             conversionListFragment = ConversionListFragment()
             val bundle = Bundle()
             bundle.putParcelableArrayList("ratesObjs", ratesObjs as ArrayList<out Parcelable>)
             conversionListFragment.arguments = bundle
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.lytListContainer, conversionListFragment, "ConversionListFragment")?.commit()
-        })
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.lytListContainer, conversionListFragment, "ConversionListFragment")
+                ?.commit()
+        }
 
         return rootView
     }

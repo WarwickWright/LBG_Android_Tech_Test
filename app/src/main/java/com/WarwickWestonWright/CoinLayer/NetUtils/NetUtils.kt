@@ -26,7 +26,7 @@ class NetUtils(private val iConnectionStatus: IConnectionStatus, context: AppCom
             requestBuilder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
             requestBuilder.addCapability(NetworkCapabilities.NET_CAPABILITY_SUPL)
             val request = requestBuilder.build()
-            var netAvailable = false
+            val netAvailable = false
             netCallback = object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     isConnected = true

@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun iOnlineData(data: String?) {
-        var jso = JSONObject(data.toString())
+        val jso = JSONObject(data.toString())
         if(jso.getBoolean("success")) {
             time = Date(jso.getInt("timestamp").toLong().times(1000))
             dateViewModel.selected.value = time

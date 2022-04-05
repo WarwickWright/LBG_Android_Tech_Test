@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.WarwickWestonWright.CoinLayer.DataObjects.RatesObj
 import com.WarwickWestonWright.CoinLayer.databinding.ConversionListFragmentBinding
 
-class RatesAdapter(private val values: MutableList<RatesObj>, val iRatesAdapter: IRatesAdapter) : RecyclerView.Adapter<RatesAdapter.ViewHolder>(), View.OnClickListener {
+class RatesAdapter(private val values: MutableList<RatesObj>, private val iRatesAdapter: IRatesAdapter) : RecyclerView.Adapter<RatesAdapter.ViewHolder>(), View.OnClickListener {
 
     interface IRatesAdapter { fun iRatesAdapter(ratesObj: RatesObj) }
 

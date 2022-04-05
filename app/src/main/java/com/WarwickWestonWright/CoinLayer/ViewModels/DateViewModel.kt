@@ -6,7 +6,4 @@ import java.util.*
 
 class DateViewModel : ViewModel() {
     val selected = MutableLiveData<Date>()
-    fun select(date: Date) {
-        selected.value = date
-    }
 }

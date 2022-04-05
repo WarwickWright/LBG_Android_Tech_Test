@@ -17,7 +17,7 @@ class ConversionListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { bundle ->
-            ratesObjs = bundle.getParcelableArrayList<RatesObj>("ratesObjs")!!
+            ratesObjs = bundle.getParcelableArrayList("ratesObjs")!!
         }
     }
 
